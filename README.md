@@ -21,6 +21,9 @@ COPY datadog_log10x-1.0.0-py3-none-any.whl /tmp/
 RUN agent integration install -r -w /tmp/datadog_log10x-1.0.0-py3-none-any.whl
 ```
 
+The install steps, the dashboard import and the troubleshooting notes are also written up
+at [doc.log10x.com/install/datadog](https://doc.log10x.com/install/datadog/).
+
 Then follow the Setup section below. The tile text as submitted to Datadog follows.
 
 ---
