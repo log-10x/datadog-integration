@@ -117,8 +117,8 @@ fall into four families:
 
 The last two families come from the Retriever, which runs as its own deployment, so a
 second Agent instance points at it. On Kubernetes that is an Autodiscovery annotation on
-the index, query and stream pods. On Lambda the Retriever has no endpoint to scrape, and
-those four metrics do not arrive.
+the index, query and stream pods. On Lambda the Retriever has no endpoint for the Agent to
+scrape, so those four metrics do not arrive through this check.
 
 ### Events
 
