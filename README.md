@@ -27,7 +27,8 @@ at [doc.log10x.com/install/datadog](https://doc.log10x.com/install/datadog/).
 The dashboard's logo widget loads its image from doc.log10x.com, so each viewer's browser
 requests that image from there.
 
-Then follow the Setup section below. The tile text follows.
+Then follow the Setup section below, skipping its install command. The wheel above
+replaces that step until Datadog publishes the catalogue entry. The tile text follows.
 
 ---
 
