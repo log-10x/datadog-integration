@@ -9,7 +9,7 @@
     "configuration": "README.md#Setup",
     "support": "README.md#Support",
     "changelog": "CHANGELOG.md",
-    "description": "Per-pattern log volume and bytes read, forwarded, offloaded and retrieved by the 10x Engine",
+    "description": "Per-pattern log volume and bytes read, forwarded, offloaded, and retrieved by the 10x Engine and its Retriever",
     "title": "log10x",
     "media": [
       {
@@ -19,7 +19,7 @@
       },
       {
         "media_type": "image",
-        "caption": "Bytes and events read against bytes and events forwarded, the forwarded share, and the top patterns by bytes, on the OpenTelemetry demo",
+        "caption": "Bytes and events read against bytes and events forwarded, the share passed to Standard Indexing, and the top patterns by bytes, on the OpenTelemetry demo",
         "image_url": "images/log10x_read_forwarded.png"
       }
     ],
@@ -27,7 +27,7 @@
       "Supported OS::Linux",
       "Supported OS::Windows",
       "Supported OS::macOS",
-      "Category::Log Collection",
+      "Category::Cost Management",
       "Category::Metrics",
       "Category::Kubernetes",
       "Offering::Integration",
