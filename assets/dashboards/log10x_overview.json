@@ -1,12 +1,12 @@
 {
   "title": "log10x Overview",
-  "description": "## log10x\n\nWhat the 10x Engine read, what it forwarded, and what it holds in offload storage, per message pattern.\n\nMetrics arrive through the log10x Agent check, which reads the engine's Prometheus endpoint.",
+  "description": "## log10x\n\nWhat the 10x Engine read, what it forwarded, and what it holds in offload storage, per message pattern.\n\nMetrics arrive through the log10x Agent check, which reads the Prometheus endpoint on the engine and, for the offload and retrieval counters, on the Retriever.",
   "widgets": [
     {
       "id": 1000000000000001,
       "definition": {
         "type": "image",
-        "url": "https://static.datadoghq.com/static/images/logos/log10x_large.svg",
+        "url": "https://doc.log10x.com/assets/favicon-192x192.png",
         "sizing": "contain",
         "margin": "md",
         "has_background": false,
@@ -25,7 +25,7 @@
       "id": 1000000000000002,
       "definition": {
         "type": "note",
-        "content": "**About**\n\nThe 10x Engine runs in the operator's network in front of Datadog, groups events by message pattern, and decides per pattern whether to forward, compact or offload them. This dashboard shows the counts on each side of that decision.",
+        "content": "**About**\n\nThe 10x Engine runs in the operator's network in front of Datadog, groups events by message pattern, and decides per pattern whether to forward, compact, or offload them. This dashboard shows the counts on each side of that decision.",
         "background_color": "white",
         "font_size": "14",
         "text_align": "center",
@@ -185,7 +185,7 @@
           {
             "id": 1000000000000014,
             "definition": {
-              "title": "Forwarded bytes as a share of bytes read",
+              "title": "Bytes passed to Standard as a share of bytes read",
               "title_size": "16",
               "title_align": "left",
               "show_legend": true,
@@ -202,14 +202,20 @@
                 {
                   "formulas": [
                     {
-                      "formula": "query1 / query2"
+                      "formula": "(query1 / query2) * 100",
+                      "number_format": {
+                        "unit": {
+                          "type": "canonical_unit",
+                          "unit_name": "percent"
+                        }
+                      }
                     }
                   ],
                   "queries": [
                     {
                       "data_source": "metrics",
                       "name": "query1",
-                      "query": "sum:log10x.bytes.forwarded.count{$tenx_env,$tenx_user_service}.as_count().rollup(sum, 300)"
+                      "query": "sum:log10x.bytes.forwarded.count{$tenx_env,$tenx_user_service,routestate:pass}.as_count().rollup(sum, 300)"
                     },
                     {
                       "data_source": "metrics",
@@ -229,61 +235,6 @@
             },
             "layout": {
               "x": 0,
-              "y": 4,
-              "width": 6,
-              "height": 3
-            }
-          },
-          {
-            "id": 1000000000000015,
-            "definition": {
-              "title": "Encoded size against forwarded bytes, when compaction is on",
-              "title_size": "16",
-              "title_align": "left",
-              "show_legend": true,
-              "legend_layout": "auto",
-              "legend_columns": [
-                "avg",
-                "min",
-                "max",
-                "value",
-                "sum"
-              ],
-              "type": "timeseries",
-              "requests": [
-                {
-                  "formulas": [
-                    {
-                      "formula": "query1"
-                    },
-                    {
-                      "formula": "query2"
-                    }
-                  ],
-                  "queries": [
-                    {
-                      "data_source": "metrics",
-                      "name": "query1",
-                      "query": "sum:log10x.bytes.encoded.count{$tenx_env,$tenx_user_service}.as_count()"
-                    },
-                    {
-                      "data_source": "metrics",
-                      "name": "query2",
-                      "query": "sum:log10x.bytes.forwarded.count{$tenx_env,$tenx_user_service}.as_count()"
-                    }
-                  ],
-                  "response_format": "timeseries",
-                  "style": {
-                    "palette": "dog_classic",
-                    "line_type": "solid",
-                    "line_width": "normal"
-                  },
-                  "display_type": "line"
-                }
-              ]
-            },
-            "layout": {
-              "x": 6,
               "y": 4,
               "width": 6,
               "height": 3
